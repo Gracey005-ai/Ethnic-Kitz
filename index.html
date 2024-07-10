@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethnic Kitz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .header-title {
+            font-size: 4.5rem;
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #343a40;
+            color: white;
+            margin-bottom: 0;
+        }
+        .carousel {
+            width: 100%;
+            height: 600px; /* Adjust the height to make the carousel bigger */
+            margin-bottom: 40px;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 600px; /* Adjust the height to match the carousel */
+            object-fit: cover;
+        }
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .carousel-control-prev, .carousel-control-next {
+            width: 5%;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            opacity: 1;
+        }
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+        }
+        .card {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            margin-bottom: 40px;
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .image {
+            opacity: 1;
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: 0.5s ease;
+            backface-visibility: hidden;
+        }
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            opacity: 0;
+            transition: 0.5s ease;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .card:hover .image {
+            opacity: 0.3;
+        }
+        .card:hover .overlay {
+            opacity: 1;
+        }
+        .overlay-title {
+            background-color: #04AA6D;
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .overlay-description {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-4">
+        <h1 class="header-title">Ethnic Kitz</h1>
+    </header>
+    <div class="container my-5">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="Authentic crusine.png" class="d-block w-100" alt="Slider 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Welcome to Our Ethnic Food Menu</h5>
+                        <p>Discover the rich flavors of our traditional dishes.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Experience our ethnic food menu.png" class="d-block w-100" alt="Slider 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Experience Authentic Cuisine</h5>
+                        <p>Our recipes are passed down through generations.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="Enjoy our speacialties.png" class="d-block w-100" alt="Slider 3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Enjoy Our Specialties</h5>
+                        <p>From appetizers to desserts, we have something for everyone.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Ubi's Fried Rice</h2>
+        <div class="row justify-content-center" id="ubis-fried-rice"></div>
+    </div>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Other Ethnic Dishes</h2>
+        <div class="row justify-content-center" id="ethnic-dishes"></div>
+    </div>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Ethnic Beverages</h2>
+        <div class="row justify-content-center" id="beverages"></div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Ethnic Kitz. All Rights Reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function populateCards(category, data) {
+                const container = document.getElementById(category);
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.classList.add('col-md-4', 'col-sm-6', 'col-xs-12', 'card');
+                    card.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="image">
+                        <div class="overlay">
+                            <div class="overlay-title">${item.name}</div>
+                            <div class="overlay-description">${item.description}</div>
+                            <a href="${item.orderLink}" class="btn btn-primary">Order Now</a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            const ubisFriedRice = [
+                { name: "Ubi's Fried Rice Special", description: "Delicious fried rice with a mix of vegetables and spices.", image: "nasi goreng.png", orderLink: "https://forms.gle/your-google-form-link" }
+            ];
+
+            const ethnicDishes = [
+                { name: "Ayam Pansuh", description: "Traditional chicken cooked in bamboo.", image: "ayam pansuh.png", orderLink: "https://forms.gle/your-google-form-link" },
+                { name: "Kasam Ensabi", description: "Fermented mustard greens with a unique flavor.", image: "kasam ensabi.png", orderLink: "https://forms.gle/your-google-form-link" },
+                { name: "Umai Udang", description: "Traditional Sarawakian prawn ceviche.", image: "umai udang.png", orderLink: "https://forms.gle/your-google-form-link" },
+                { name: "Ayam Tuai Terung Asam", description: "Chicken with sour eggplant.", image: "ayam tuai terung asam.png", orderLink: "https://forms.gle/your-google-form-link" }
+            ];
+
+            const ethnicBeverages = [
+                { name: "Milo Peng", description: "Iced Milo drink with milk.", image: "milo.png", orderLink: "https://forms.gle/your-google-form-link" },
+                { name: "Kopi C Peng", description: "Iced coffee with milk.", image: "2.png", orderLink: "https://forms.gle/your-google-form-link" },
+                { name: "Horlicks Peng", description: "Iced Horlicks drink with milk.", image: "3.png", orderLink: "https://forms.gle/your-google-form-link" },
+                { name: "Barley Peng", description: "Iced barley drink sweetened with syrup.", image: "4.png", orderLink: "https://forms.gle/your-google-form-link" },
+                { name: "Teh Tarik Peng", description: "Pulled tea with condensed milk over ice.", image: "5.png", orderLink: "https://forms.gle/your-google-form-link" }
+            ];
+
+            populateCards('ubis-fried-rice', ubisFriedRice);
+            populateCards('ethnic-dishes', ethnicDishes);
+            populateCards('beverages', ethnicBeverages);
+        });
+    </script>
+</body>
+</html>
